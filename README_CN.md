@@ -2,10 +2,12 @@
 
 [English](README.md)
 
-微信 AI Agent 桥接器 — 通过 [iLink](https://www.ilink.wiki) API 将微信消息接入 AI 编程助手（Claude、Codex、Gemini、Kimi 等）。
+微信 AI Agent 桥接器 — 将微信消息接入 AI Agent（Claude、Codex、Gemini、Kimi 等）。
 
-| | | |
-|:---:|:---:|:---:|
+> 本项目参考 [@tencent-weixin/openclaw-weixin](https://npmx.dev/package/@tencent-weixin/openclaw-weixin) 实现，仅限个人学习，勿做他用。
+
+|                                                 |                                                 |                                                 |
+| :---------------------------------------------: | :---------------------------------------------: | :---------------------------------------------: |
 | <img src="previews/preview1.png" width="280" /> | <img src="previews/preview2.png" width="280" /> | <img src="previews/preview3.png" width="280" /> |
 
 ## 快速开始
@@ -19,6 +21,7 @@ weclaw start
 ```
 
 就这么简单。首次启动时，WeClaw 会：
+
 1. 显示二维码 — 用微信扫码登录
 2. 自动检测已安装的 AI Agent（Claude、Codex、Gemini 等）
 3. 保存配置到 `~/.weclaw/config.json`
@@ -44,11 +47,11 @@ docker run -it -v ~/.weclaw:/root/.weclaw ghcr.io/fastclaw-ai/weclaw start
 
 **Agent 接入模式：**
 
-| 模式 | 工作方式 | 支持的 Agent |
-|------|---------|-------------|
+| 模式 | 工作方式                                                         | 支持的 Agent                                            |
+| ---- | ---------------------------------------------------------------- | ------------------------------------------------------- |
 | ACP  | 长驻子进程，通过 stdio JSON-RPC 通信。速度最快，复用进程和会话。 | Claude, Codex, Kimi, Gemini, Cursor, OpenCode, OpenClaw |
-| CLI  | 每条消息启动一个新进程，支持通过 `--resume` 恢复会话。 | Claude (`claude -p`)、Codex (`codex exec`) |
-| HTTP | OpenAI 兼容的 Chat Completions API。 | OpenClaw（HTTP 回退） |
+| CLI  | 每条消息启动一个新进程，支持通过 `--resume` 恢复会话。           | Claude (`claude -p`)、Codex (`codex exec`)              |
+| HTTP | OpenAI 兼容的 Chat Completions API。                             | OpenClaw（HTTP 回退）                                   |
 
 同时存在 ACP 和 CLI 时，自动优先选择 ACP。
 
@@ -56,25 +59,25 @@ docker run -it -v ~/.weclaw:/root/.weclaw ghcr.io/fastclaw-ai/weclaw start
 
 在微信中发送以下命令：
 
-| 命令 | 说明 |
-|------|------|
-| `你好` | 发送给默认 Agent |
-| `/codex 写一个排序函数` | 发送给指定 Agent |
-| `/cc 解释一下这段代码` | 通过别名发送 |
-| `/claude` | 切换默认 Agent 为 Claude |
-| `/status` | 查看当前 Agent 信息 |
+| 命令                    | 说明                     |
+| ----------------------- | ------------------------ |
+| `你好`                  | 发送给默认 Agent         |
+| `/codex 写一个排序函数` | 发送给指定 Agent         |
+| `/cc 解释一下这段代码`  | 通过别名发送             |
+| `/claude`               | 切换默认 Agent 为 Claude |
+| `/status`               | 查看当前 Agent 信息      |
 
 ### 快捷别名
 
-| 别名 | Agent |
-|------|-------|
-| `/cc` | Claude |
-| `/cx` | Codex |
-| `/cs` | Cursor |
-| `/km` | Kimi |
-| `/gm` | Gemini |
+| 别名   | Agent    |
+| ------ | -------- |
+| `/cc`  | Claude   |
+| `/cx`  | Codex    |
+| `/cs`  | Cursor   |
+| `/km`  | Kimi     |
+| `/gm`  | Gemini   |
 | `/ocd` | OpenCode |
-| `/oc` | OpenClaw |
+| `/oc`  | OpenClaw |
 
 切换默认 Agent 会写入配置文件，重启后仍然生效。
 
@@ -126,6 +129,7 @@ curl -X POST http://127.0.0.1:18011/api/send \
 ```
 
 环境变量：
+
 - `WECLAW_DEFAULT_AGENT` — 覆盖默认 Agent
 - `OPENCLAW_GATEWAY_URL` — OpenClaw HTTP 回退地址
 - `OPENCLAW_GATEWAY_TOKEN` — OpenClaw API Token

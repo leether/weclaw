@@ -2,7 +2,9 @@
 
 [中文文档](README_CN.md)
 
-WeChat AI Agent Bridge — connect WeChat to AI coding agents (Claude, Codex, Gemini, Kimi, etc.) via the [iLink](https://www.ilink.wiki) API.
+WeChat AI Agent Bridge — connect WeChat to AI agents (Claude, Codex, Gemini, Kimi, etc.).
+
+> This project is inspired by [@tencent-weixin/openclaw-weixin](https://npmx.dev/package/@tencent-weixin/openclaw-weixin). For personal learning only, not for commercial use.
 
 | | | |
 |:---:|:---:|:---:|
